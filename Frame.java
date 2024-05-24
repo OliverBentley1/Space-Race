@@ -29,7 +29,7 @@ public class Frame extends JFrame implements KeyListener {
         this.setSize(FRAMESIZE, FRAMESIZE);
         this.setLocationRelativeTo(null);
         this.setResizable(false);
-        this.setIconImage(new ImageIcon("spacerace.jpg").getImage());
+        this.setIconImage(new ImageIcon("spacerace.png").getImage());
         this.addKeyListener(this);
         this.add(panel);
         this.pack();
