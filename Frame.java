@@ -43,10 +43,10 @@ public class Frame extends JFrame implements KeyListener {
     	               Thread.sleep(100);
     	           } catch (Exception e) {}
                     if (keyDown1) {
-                        if (up1 && p1Velocity > -20) {
+                        if (up1 && p1Velocity > -25) {
                             Panel.rocketImage1 = new ImageIcon("RocketWithFire.png").getImage();
                             p1Velocity--;
-                        } else if (p1Y < startY && p1Velocity < 20){
+                        } else if (p1Y < startY && p1Velocity < 25){
                             p1Velocity++;
                         }
                     } 
@@ -74,10 +74,10 @@ public class Frame extends JFrame implements KeyListener {
     	               Thread.sleep(100);
     	           } catch (Exception e) {}
     	           if (keyDown2) {
-                        if (up2 && p2Velocity > -20) {
+                        if (up2 && p2Velocity > -25) {
                             Panel.rocketImage2 = new ImageIcon("RocketWithFire.png").getImage();
                             p2Velocity--;
-                        } else if (p2Y < startY && p2Velocity < 20){
+                        } else if (p2Y < startY && p2Velocity < 25){
                             p2Velocity++;
                         }
                     }
