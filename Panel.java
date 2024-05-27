@@ -5,9 +5,9 @@ import java.util.ArrayList;
 public class Panel extends JPanel {
     final public static int PANELSIZE = 500;
     final public static int DOTSIZE = 15;
-    final public static int SHIPWIDTH = 50;
+    final public static int SHIPWIDTH = 25;
     final public static int SHIPHEIGHT = SHIPWIDTH * 2;
-    final public static int NUMDOTS = 20;
+    final public static int NUMDOTS = 40;
     
     Image backgroundImage;
     Image dotImage;
@@ -17,8 +17,6 @@ public class Panel extends JPanel {
     public static JLabel label1;
     public static JLabel label2;
     public static JLabel mainLabel;
-    
-    public static ArrayList<Dot> dotList = new ArrayList<Dot>(); 
     
     Panel() {
         this.setPreferredSize(new Dimension(PANELSIZE, PANELSIZE));
@@ -63,16 +61,12 @@ public class Panel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2D = (Graphics2D) g;
         g2D.drawImage(backgroundImage, 0, 0, PANELSIZE, PANELSIZE, null);
-        for (int i = 0; i < dotList.size(); i++) {
-            Dot dot = dotList.get(i);
+        for (int i = 0; i < Main.dotList.length; i++) {
+            Dot dot = Main.dotList[i];
             g2D.drawImage(dotImage, dot.x - dotFixedLoc, dot.y - dotFixedLoc, DOTSIZE, DOTSIZE, null);
         }
-        g2D.drawImage(rocketImage1, Frame.p1X - shipFixedX, Frame.p1Y - shipFixedY, SHIPWIDTH, SHIPHEIGHT, null);
-        g2D.drawImage(rocketImage2, Frame.p2X - shipFixedX, Frame.p2Y - shipFixedY, SHIPWIDTH, SHIPHEIGHT, null);
+        g2D.drawImage(rocketImage1,(int) Main.p1X - shipFixedX,(int) Main.p1Y - shipFixedY, SHIPWIDTH, SHIPHEIGHT, null);
+        g2D.drawImage(rocketImage2,(int) Main.p2X - shipFixedX,(int) Main.p2Y - shipFixedY, SHIPWIDTH, SHIPHEIGHT, null);
         g2D.drawImage(line, 248, Line.y, 5, 500, null);
-        
-        if (!Frame.stop) {
-            repaint(); 
-        }
     }
 }
