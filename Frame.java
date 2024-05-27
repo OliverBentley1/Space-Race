@@ -5,21 +5,10 @@ public class Frame extends JFrame implements KeyListener {
     public static boolean stop = true;
     public static Panel panel;
     final public static int FRAMESIZE = 500;
-    public static int p1Velocity = 0;
-    public static int p2Velocity = 0;
-    final public static int startP1X = 125;
-    final public static int startY = 450;
-    final public static int startP2X = 375; 
-    public static int p1X = startP1X;
-    public static int p1Y = startY;
-    public static int p2X = startP2X;
-    public static int p2Y = startY;
     static boolean up2 = false;
     static boolean keyDown2 = false;
     static boolean up1 = false;
     static boolean keyDown1 = false;
-    public static int p1Score = 0;
-    public static int p2Score = 0;
     
     Frame() {
         panel = new Panel();
@@ -34,69 +23,6 @@ public class Frame extends JFrame implements KeyListener {
         this.add(panel);
         this.pack();
         this.setVisible(true);
-        
-        Thread thread1 = new Thread() {
-            @Override
-            public void run() {
-                while (!stop) {
-                    try {
-    	               Thread.sleep(100);
-    	           } catch (Exception e) {}
-                    if (keyDown1) {
-                        if (up1 && p1Velocity > -25) {
-                            Panel.rocketImage1 = new ImageIcon("RocketWithFire.png").getImage();
-                            p1Velocity--;
-                        } else if (p1Y < startY && p1Velocity < 25){
-                            p1Velocity++;
-                        }
-                    } 
-                    if (p1Velocity > 0 && p1Y > startY) {
-                        p1Velocity = 0;
-                    } else {
-                        p1Y += p1Velocity;
-                    }
-                    
-                    if (p1Y + 50 <= 0) {
-                        p1Y = startY;
-                        p1Velocity = 0;
-                        p1Score++;
-                        Panel.label1.setText(""+p1Score);
-                    }
-                }
-            }
-        };
-        Thread thread2 = new Thread () {
-            @Override
-            public void run() {
-                thread1.start();
-                while (!stop) {
-                    try {
-    	               Thread.sleep(100);
-    	           } catch (Exception e) {}
-    	           if (keyDown2) {
-                        if (up2 && p2Velocity > -25) {
-                            Panel.rocketImage2 = new ImageIcon("RocketWithFire.png").getImage();
-                            p2Velocity--;
-                        } else if (p2Y < startY && p2Velocity < 25){
-                            p2Velocity++;
-                        }
-                    }
-                    if (p2Velocity > 0 && p2Y > startY) {
-                        p2Velocity = 0;
-                    } else {
-                        p2Y += p2Velocity;
-                    }
-                    if (p2Y + 50 <= 0) {
-                        p2Y = startY;
-                        p2Velocity = 0;
-                        p2Score++;
-                        Panel.label2.setText(""+p2Score);
-                    }
-                }
-            }
-        };
-        thread2.start();
-        
     }
     
     @Override
@@ -106,13 +32,13 @@ public class Frame extends JFrame implements KeyListener {
     public void keyReleased(KeyEvent e) {
         if (!stop && (e.getKeyCode() == KeyEvent.VK_DOWN || e.getKeyCode() == KeyEvent.VK_UP)) {
             keyDown2 = false;
-            if (e.getKeyCode() == KeyEvent.VK_UP) {
+            if (e.getKeyCode() == KeyEvent.VK_UP && Main.waitP2 == 0) {
                 Panel.rocketImage2 = new ImageIcon("rocket.png").getImage();
             }
         }
         if (!stop && (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_S)) {
             keyDown1 = false;
-            if (e.getKeyCode() == KeyEvent.VK_W) {
+            if (e.getKeyCode() == KeyEvent.VK_W && Main.waitP1 == 0) {
                 Panel.rocketImage1 = new ImageIcon("rocket.png").getImage();
             }
         }
